@@ -1,0 +1,8 @@
+//
+// Created by oved on 02/08/2019.
+//
+
+#ifndef SUDOKOPROJECT_SOLVER_H
+#define SUDOKOPROJECT_SOLVER_H
+
+#endif //SUDOKOPROJECT_SOLVER_H
