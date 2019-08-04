@@ -4,14 +4,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-struct Node {
+struct Node {                                  /*action represented by node */
     int data;
     struct Node* next;
     struct Node* prev;
 
 };
 
-struct Node* head;
+struct Node* head;                              /*maintaining 3 pointers - last action , first action and current action*/
 struct Node* tail;
 struct Node* currentAction;
 
@@ -27,12 +27,12 @@ struct Node* createNode(int data){
 
 void InsertAction (int data){
     struct Node* newNode = createNode(data);
-    if(head == NULL){
+    if(head == NULL){                               /*check if this is the first action (new list)*/
         head = newNode;
         tail = newNode;
         currentAction = newNode;
     }
-    while( currentAction != tail){
+    while( currentAction != tail){                  /*if there are actions we need to delete from memory */
         tail = tail->prev;
         free(tail->next);
         tail->next = NULL;
@@ -45,7 +45,7 @@ void InsertAction (int data){
 
 int listUndo(){
     if(currentAction == head){
-        printf("Error : You've reached the first action, can't undo");
+        printf("Error : You've reached the first action, can't undo\n");
         return 0;
     }
     currentAction = currentAction->prev;
@@ -54,7 +54,7 @@ int listUndo(){
 
 int listRedo(){
     if(currentAction == tail){
-        printf("Error : You've reached the last action, can't redo");
+        printf("Error : You've reached the last action, can't redo\n");
         return 0;
     }
     currentAction = currentAction->next;
@@ -64,7 +64,7 @@ int listRedo(){
 void printLastToFirst(){
     struct Node* temp = tail;
     if(head == NULL){
-        printf("Error : Nothing to print, list is empty");
+        printf("Error : Nothing to print, list is empty\n");
     }
     while(temp != head){
         printf("%d\n" , temp->data);
@@ -73,7 +73,7 @@ void printLastToFirst(){
 void printFirstToCurrentAction(){
     struct Node* temp = head;
     if(head == NULL){
-        printf("Error : Nothing to print, list is empty");
+        printf("Error : Nothing to print, list is empty\n");
     }
     while(temp != currentAction){
         printf("%d\n" , temp->data);
