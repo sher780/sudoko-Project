@@ -1,11 +1,10 @@
 
 
 #include "doublyLinkedList.h"
-#include <stdio.h>
-#include <stdlib.h>
+
 
 struct Node {                                  /*action represented by node */
-    int data;
+    sudokoBoard *board;
     struct Node* next;
     struct Node* prev;
 
@@ -16,17 +15,17 @@ struct Node* tail;
 struct Node* currentAction;
 
 
-struct Node* createNode(int data){
+struct Node* createNode(sudokoBoard *board){
     struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
-    newNode->data = data;
+    newNode->board = board;
     newNode->prev = NULL;
     newNode->next = NULL;
     return newNode;
 }
 
 
-void InsertAction (int data){
-    struct Node* newNode = createNode(data);
+void InsertAction (sudokoBoard *board){
+    struct Node* newNode = createNode(board);
     if(head == NULL){                               /*check if this is the first action (new list)*/
         head = newNode;
         tail = newNode;
@@ -43,39 +42,39 @@ void InsertAction (int data){
     currentAction = newNode;
 }
 
-int listUndo(){
+sudokoBoard* listUndo(){
     if(currentAction == head){
         printf("Error : You've reached the first action, can't undo\n");
         return 0;
     }
     currentAction = currentAction->prev;
-    return currentAction->data;
+    return currentAction->board;
 }
 
-int listRedo(){
+sudokoBoard* listRedo(){
     if(currentAction == tail){
         printf("Error : You've reached the last action, can't redo\n");
         return 0;
     }
     currentAction = currentAction->next;
-    return  currentAction->data;
+    return  currentAction->board;
 }
 
-void printLastToFirst(){
+void printLastToFirst(int whatToPrint){
     struct Node* temp = tail;
     if(head == NULL){
         printf("Error : Nothing to print, list is empty\n");
     }
     while(temp != head){
-        printf("%d\n" , temp->data);
+        printBoard(whatToPrint , temp->board);
     }
 }
-void printFirstToCurrentAction(){
+void printFirstToCurrentAction(int whatToPrint){
     struct Node* temp = head;
     if(head == NULL){
         printf("Error : Nothing to print, list is empty\n");
     }
     while(temp != currentAction){
-        printf("%d\n" , temp->data);
+        printBoard(whatToPrint , temp->board);
     }
 }
