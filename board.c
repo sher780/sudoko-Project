@@ -62,17 +62,17 @@ void print_dashes(sudokoBoard *board) {
     }
     printf("\n");
 }
-void printCell(int valueToPrint , cell cellToPrint){
+void printCell(int valueToPrint , cell cellToPrint){    /*print 4 digits - space , number(2 digits) , dot asterisk or space according to cell data*/
     printf(" ");
     (valueToPrint == 0 )? printf(BLANK_SPACE) : printf("%2d" , valueToPrint);
     if(cellToPrint.is_fixed){
-        printf(".");
+        printf(".");                /* 10.*/  /*fixed cell*/
     }
     else if (cellToPrint.is_erroneus){
-        printf("*");
+        printf("*");                /* 10**/  /*erroneus cell*/
     }
     else{
-        printf(" ");
+        printf(" ");                /* 10 */  /*regular cell*/
     }
 }
 
@@ -92,9 +92,7 @@ void printBoard(int whatToPrint , sudokoBoard* sudokoBoard){
                 default:
                     valueToPrint = sudokoBoard->board[i][j].value;
             }
-
-            printCell(valueToPrint , sudokoBoard->board[i][j]);
-
+            printCell(valueToPrint , sudokoBoard->board[i][j]);             /*print 4 digits - space , number(2 digits) , dot asterisk or space according to cell data*/
             if (j % sudokoBoard->widthOfBlock == sudokoBoard->widthOfBlock - 1)
                 printf("|");
         }
