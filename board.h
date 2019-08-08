@@ -4,10 +4,12 @@
 #define SUDOKOPROJECT_BOARD_H
 typedef struct {
     int is_fixed; /*0 if fixed 1 if not fixed */
+    int is_erroneus;
     int value; /*0 if empty*/
     int solution_value; /*0 if empty*/
     int *potentialValues;
     int numOfPotentialValues;
+
 } cell;
 typedef struct {
     cell **board;

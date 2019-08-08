@@ -3,7 +3,7 @@
 #include "board.h"
 #include <stdlib.h>
 #include <stdio.h>
-#define BLANK_SPACE "    "
+#define BLANK_SPACE "  "
 #define FIXED 0
 sudokoBoard *createBoard(int heightOfBlock , int widthOfBlock , int markErrors){
     sudokoBoard *board = (sudokoBoard*)malloc(sizeof(sudokoBoard)) ;
@@ -62,12 +62,25 @@ void print_dashes(sudokoBoard *board) {
     }
     printf("\n");
 }
+void printCell(int valueToPrint , cell cellToPrint){
+    printf(" ");
+    (valueToPrint == 0 )? printf(BLANK_SPACE) : printf("%2d" , valueToPrint);
+    if(cellToPrint.is_fixed){
+        printf(".");
+    }
+    else if (cellToPrint.is_erroneus){
+        printf("*");
+    }
+    else{
+        printf(" ");
+    }
+}
 
 void printBoard(int whatToPrint , sudokoBoard* sudokoBoard){
     int i, j, valueToPrint;
     print_dashes(sudokoBoard);
     for(i=0 ; i< sudokoBoard->boardSize; ++i){
-        printf("| ");
+        printf("|");
         for(j=0 ; j<sudokoBoard->boardSize; ++j) {
             switch(whatToPrint){
                 case 0 :
@@ -79,14 +92,10 @@ void printBoard(int whatToPrint , sudokoBoard* sudokoBoard){
                 default:
                     valueToPrint = sudokoBoard->board[i][j].value;
             }
-            (valueToPrint == 0 )? printf(BLANK_SPACE) : printf("%2d" , valueToPrint);
-             /*working progress need to add * and . for erronous values and for fixed values*/
 
+            printCell(valueToPrint , sudokoBoard->board[i][j]);
 
-
-            if (j % sudokoBoard->widthOfBlock == sudokoBoard->widthOfBlock - 1 && j != (sudokoBoard->boardSize - 1))
-                printf("| ");
-            if (j == sudokoBoard->boardSize - 1)
+            if (j % sudokoBoard->widthOfBlock == sudokoBoard->widthOfBlock - 1)
                 printf("|");
         }
         printf("\n");
