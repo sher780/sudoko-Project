@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #ifndef SUDOKOPROJECT_DOUBLYLINKEDLIST_H
 #define SUDOKOPROJECT_DOUBLYLINKEDLIST_H
-void InsertAction (sudokoBoard *board);               /*Insert Action after current action, delete all actions we've undo and free memory */
+void InsertAction (int oldValue , int newValue, int row , int column);               /*Insert Action after current action, delete all actions we've undo and free memory */
 sudokoBoard* listUndo();                             /*moves current action pointer to previous action , return data of current action, prints error if no action to undo */
 sudokoBoard* listRedo();                             /*moves current action pointer to next action , return data of current action , prints error if no action to redo*/
 void printLastToFirst(int whatToPrint);                    /*prints the data from the last action to the first action*/

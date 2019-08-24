@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #define BLANK_SPACE "  "
+#define CELL_SPACE 4
 #define FIXED 0
 sudokoBoard *createBoard(int heightOfBlock , int widthOfBlock , int markErrors){
     sudokoBoard *board = (sudokoBoard*)malloc(sizeof(sudokoBoard)) ;
@@ -55,7 +56,7 @@ void destroyBoard(sudokoBoard *board){
 }
 
 void print_dashes(sudokoBoard *board) {
-    int dashes = 4*board->boardSize + board->heightOfBlock + 1;
+    int dashes = CELL_SPACE*board->boardSize + board->heightOfBlock + 1;
     int i;
     for (i = 0; i < dashes; ++i) {
         printf("-");
